@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indelével Licitação · consultoria especializada</title>
+  <meta name="description" content="Indelével Licitação — consultoria em licitações, análise de editais, elaboração de propostas e cadastro SICAF para empresas que querem vender ao setor público.">
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9fbfd;
+      color: #1e2b37;
+      line-height: 1.5;
+    }
+
+    /* acessibilidade: labels visuais escondidos */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Cores sofisticadas */
+    :root {
+      --azul-profundo: #0a2a44;
+      --azul-suave: #1e4a6f;
+      --cinza-elegante: #4a5568;
+      --cinza-claro: #eef2f6;
+      --dourado: #c6a15b;
+      --dourado-hover: #b58c45;
+      --branco: #ffffff;
+      --sombra: 0 20px 30px -10px rgba(0,20,40,0.15);
+    }
+
+    /* header fixo */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      z-index: 1000;
+      padding: 0.8rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(198, 161, 91, 0.2);
+    }
+
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--azul-profundo) 30%, var(--dourado) 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .logo span {
+      font-weight: 300;
+      font-size: 1rem;
+      color: var(--cinza-elegante);
+      background: none;
+      -webkit-text-fill-color: var(--cinza-elegante);
+      letter-spacing: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    nav a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--azul-profundo);
+      font-size: 0.95rem;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+    nav a:hover {
+      border-bottom-color: var(--dourado);
+      color: var(--azul-suave);
+    }
+    .btn-destaque {
+      background: var(--dourado);
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: 0.25s;
+      box-shadow: 0 8px 16px -6px rgba(198, 161, 91, 0.4);
+      white-space: nowrap;
+    }
+    .btn-destaque:hover {
+      background: var(--dourado-hover);
+      transform: scale(1.02);
+    }
+
+    /* hero */
+    .hero {
+      margin-top: 80px;
+      background: linear-gradient(105deg, #0a2a44 0%, #123b56 40%, #2c5a7a 100%), url('https://images.unsplash.com/photo-1541877945-acf7c443c48d?q=80&w=1974&auto=format&fit=crop');
+      background-blend-mode: overlay;
+      background-size: cover;
+      background-position: center 30%;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+      color: white;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,20,40,0.3);
+      z-index: 1;
+    }
+    .hero-content {
+      max-width: 600px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-inner {
+      max-width: 700px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-photo {
+      display: none;
+    }
+    .profile-photo {
+      display: none;
+    }
+    .company-logo {
+      position: absolute;
+      top: 2rem;
+      right: 3rem;
+      max-width: 220px;
+      width: auto;
+      height: auto;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+      background: rgba(255,255,255,0.08);
+      padding: 16px 20px;
+      border-radius: 16px;
+      transition: transform 0.3s ease;
+      z-index: 3;
+    }
+    .company-logo:hover {
+      transform: scale(1.05);
+    }
+    .hero-logo {
+      position: absolute;
+      top: 2rem;
+      right: 3rem;
+    }
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .hero p {
+      font-size: 1.3rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    .btn-cta {
+      background: var(--dourado);
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 50px;
+      color: var(--azul-profundo);
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 20px 25px -8px rgba(0,0,0,0.5);
+    }
+    .btn-cta:hover {
+      background: #dbb46c;
+      transform: translateY(-4px);
+    }
+
+    /* seções gerais */
+    section {
+      padding: 5rem 5%;
+    }
+    .section-title {
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--azul-profundo);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 70px;
+      height: 4px;
+      background: var(--dourado);
+      margin-top: 10px;
+    }
+    .container-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    /* sobre */
+    .sobre-grid {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .sobre-texto {
+      flex: 2;
+      font-size: 1.1rem;
+      color: var(--cinza-elegante);
+      background: white;
+      padding: 2.5rem;
+      border-radius: 24px;
+      box-shadow: var(--sombra);
+      line-height: 1.8;
+    }
+    .sobre-texto strong {
+      color: var(--azul-profundo);
+    }
+    .sobre-highlight {
+      flex: 1;
+      background: var(--azul-profundo);
+      color: white;
+      padding: 2rem;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: var(--sombra);
+    }
+    .sobre-highlight i {
+      font-size: 3rem;
+      color: var(--dourado);
+      margin-bottom: 1rem;
+    }
+    .sobre-highlight h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* cards serviços */
+    .card-servico {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 15px 30px -10px rgba(0,0,0,0.05);
+      transition: all 0.3s;
+      border: 1px solid rgba(198,161,91,0.1);
+      text-align: center;
+    }
+    .card-servico:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 40px -12px var(--azul-profundo);
+      border-color: var(--dourado);
+    }
+    .card-servico i {
+      font-size: 2.7rem;
+      color: var(--dourado);
+      margin-bottom: 1rem;
+    }
+    .card-servico h3 {
+      font-size: 1.3rem;
+      color: var(--azul-profundo);
+      margin-bottom: 0.8rem;
+    }
+
+    /* clientes (slider) */
+    .slider-container {
+      background: var(--cinza-claro);
+      border-radius: 40px;
+      padding: 3rem 2rem;
+      margin-top: 2rem;
+      position: relative;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+    }
+    .depoimento-card {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      display: none;
+      animation: fade 0.8s;
+    }
+    .depoimento-card.active {
+      display: block;
+    }
+    .depoimento-texto {
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--azul-profundo);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+    .cliente-nome {
+      margin-top: 1.5rem;
+      font-weight: 600;
+      color: var(--dourado);
+      font-size: 1.2rem;
+    }
+    .cliente-empresa {
+      font-weight: 300;
+      color: var(--cinza-elegante);
+    }
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 2rem;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #bac9d9;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .dot.active-dot {
+      background: var(--dourado);
+      transform: scale(1.2);
+    }
+    @keyframes fade {
+      from {opacity: 0.2;} to {opacity: 1;}
+    }
+
+    /* tabela planos */
+    .planos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .plano-card {
+      background: white;
+      border-radius: 30px;
+      padding: 2rem 1.8rem;
+      box-shadow: var(--sombra);
+      border: 1px solid #e4e9f0;
+      transition: 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .plano-card:hover {
+      border-color: var(--dourado);
+      transform: scale(1.02);
+    }
+    .plano-nome {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--azul-profundo);
+      border-bottom: 2px dashed var(--dourado);
+      padding-bottom: 0.8rem;
+    }
+    .plano-preco {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin: 1rem 0 0.2rem;
+      color: #1e2b37;
+    }
+    .plano-preco small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--cinza-elegante);
+    }
+    .plano-desc {
+      color: var(--cinza-elegante);
+      margin: 1rem 0;
+      flex: 1;
+    }
+    .btn-plano {
+      background: transparent;
+      border: 2px solid var(--dourado);
+      color: var(--azul-profundo);
+      font-weight: 600;
+      padding: 0.7rem;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+    .btn-plano:hover {
+      background: var(--dourado);
+      color: white;
+    }
+
+    /* contato */
+    .contato-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      background: white;
+      border-radius: 40px;
+      padding: 3rem;
+      box-shadow: var(--sombra);
+    }
+    .form-contato {
+      flex: 1 1 300px;
+    }
+    .info-contato {
+      flex: 0 1 280px;
+      background: var(--azul-profundo);
+      padding: 2rem;
+      border-radius: 30px;
+      color: white;
+    }
+    .campo {
+      margin-bottom: 1.5rem;
+    }
+    .campo input, .campo textarea {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border: 1px solid #dbe1e9;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      background: #f8fafd;
+    }
+    .campo textarea {
+      border-radius: 30px;
+      resize: vertical;
+    }
+    .btn-form {
+      background: var(--azul-profundo);
+      border: none;
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-form:hover {
+      background: var(--dourado);
+    }
+    .info-contato i {
+      color: var(--dourado);
+      margin-right: 0.8rem;
+      width: 24px;
+    }
+    .info-contato p {
+      margin: 1.5rem 0;
+      display: flex;
+      align-items: center;
+    }
+    .redes-sociais a {
+      color: white;
+      font-size: 1.8rem;
+      margin-right: 1.5rem;
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .redes-sociais a:hover {
+      color: var(--dourado);
+      transform: translateY(-3px);
+    }
+
+    /* footer */
+    footer {
+      background: #0e2233;
+      color: #b0c4d9;
+      padding: 2.5rem 5% 1.5rem;
+      border-top: 2px solid var(--dourado);
+    }
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      color: #dfe7f0;
+      text-decoration: none;
+      margin-right: 2rem;
+      font-weight: 400;
+      font-size: 0.95rem;
+    }
+    .footer-links a:hover {
+      color: var(--dourado);
+    }
+    .copy {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #7b94a9;
+    }
+
+    /* responsividade - Desktop padrão */
+    @media (max-width: 1200px) {
+      .hero {
+        min-height: 80vh;
+        padding: 0 3%;
+      }
+      .company-logo {
+        top: 1.5rem;
+        right: 2rem;
+        max-width: 200px;
+      }
+    }
+
+    /* responsividade - Tablet */
+    @media (max-width: 768px) {
+      header {
+        padding: 0.7rem 3%;
+      }
+      .logo {
+        font-size: 1.3rem;
+      }
+      nav {
+        gap: 1rem;
+        width: 100%;
+        justify-content: space-around;
+        order: 3;
+        flex-basis: 100%;
+        margin-top: 0.8rem;
+      }
+      nav a {
+        font-size: 0.85rem;
+      }
+      .btn-destaque {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+      }
+
+      .hero {
+        margin-top: 120px;
+        min-height: 70vh;
+        padding: 3rem 3%;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+        line-height: 1.3;
+      }
+      .hero p {
+        font-size: 1.05rem;
+        margin-bottom: 1.5rem;
+      }
+      .btn-cta {
+        padding: 0.85rem 2.5rem;
+        font-size: 1rem;
+      }
+      .company-logo {
+        top: 1rem;
+        right: 1.5rem;
+        max-width: 160px;
+        padding: 10px 12px;
+      }
+      .hero-inner {
+        max-width: 100%;
+      }
+
+      section {
+        padding: 3rem 3%;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .container-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .card-servico {
+        padding: 1.5rem 1rem;
+      }
+      .card-servico h3 {
+        font-size: 1.1rem;
+      }
+      .card-servico i {
+        font-size: 2.2rem;
+      }
+
+      .sobre-grid {
+        gap: 1.5rem;
+      }
+      .sobre-texto {
+        font-size: 1rem;
+        padding: 1.8rem;
+        flex: 1;
+      }
+      .sobre-highlight {
+        padding: 1.5rem;
+      }
+      .sobre-highlight h3 {
+        font-size: 1.5rem;
+      }
+
+      .slider-container {
+        padding: 2rem 1.5rem;
+        border-radius: 30px;
+      }
+      .depoimento-texto {
+        font-size: 1.2rem;
+      }
+      .cliente-nome {
+        font-size: 1rem;
+      }
+
+      .planos {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .plano-card {
+        padding: 1.5rem 1.2rem;
+        border-radius: 20px;
+      }
+      .plano-nome {
+        font-size: 1.2rem;
+      }
+      .plano-preco {
+        font-size: 1.8rem;
+      }
+
+      .contato-wrapper {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem;
+      }
+      .form-contato {
+        flex: 1;
+      }
+      .info-contato {
+        flex: 1;
+        padding: 1.5rem;
+      }
+      .campo input,
+      .campo textarea {
+        padding: 0.85rem 1rem;
+        font-size: 1rem;
+      }
+      .btn-form {
+        padding: 0.85rem 2rem;
+        font-size: 1rem;
+      }
+
+      footer {
+        padding: 2rem 3% 1rem;
+      }
+      .footer-grid {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .footer-links a {
+        margin-right: 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* responsividade - Smartphone */
+    @media (max-width: 480px) {
+      header {
+        padding: 0.6rem 2%;
+      }
+      .logo {
+        font-size: 1.1rem;
+      }
+      .logo span {
+        font-size: 0.8rem;
+      }
+      nav {
+        gap: 0.8rem;
+      }
+      nav a {
+        font-size: 0.75rem;
+        padding-bottom: 2px;
+      }
+      .btn-destaque {
+        padding: 0.45rem 1rem;
+        font-size: 0.75rem;
+      }
+
+      .hero {
+        margin-top: 100px;
+        min-height: 65vh;
+        padding: 2rem 2%;
+      }
+      .hero h1 {
+        font-size: 1.6rem;
+        line-height: 1.25;
+        margin-bottom: 1rem;
+      }
+      .hero p {
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+      }
+      .btn-cta {
+        padding: 0.75rem 2rem;
+        font-size: 0.95rem;
+      }
+      .company-logo {
+        top: 0.7rem;
+        right: 1rem;
+        max-width: 120px;
+        padding: 8px 10px;
+        border-radius: 12px;
+      }
+      .hero-inner {
+        max-width: 100%;
+      }
+
+      section {
+        padding: 2.5rem 2%;
+      }
+      .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 0.8rem;
+      }
+      .section-title:after {
+        width: 50px;
+        height: 3px;
+        margin-top: 8px;
+      }
+      .container-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .card-servico {
+        padding: 1.2rem 1rem;
+        border-radius: 16px;
+      }
+      .card-servico h3 {
+        font-size: 1rem;
+        margin-bottom: 0.6rem;
+      }
+      .card-servico p {
+        font-size: 0.9rem;
+      }
+      .card-servico i {
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .sobre-grid {
+        gap: 1rem;
+      }
+      .sobre-texto {
+        font-size: 0.95rem;
+        padding: 1.5rem;
+        flex: 1;
+        line-height: 1.6;
+      }
+      .sobre-highlight {
+        padding: 1.2rem;
+        border-radius: 20px;
+      }
+      .sobre-highlight i {
+        font-size: 2.5rem;
+      }
+      .sobre-highlight h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.4rem;
+      }
+      .sobre-highlight p {
+        font-size: 0.9rem;
+      }
+
+      .slider-container {
+        padding: 1.5rem 1rem;
+        border-radius: 25px;
+        margin-top: 1.5rem;
+      }
+      .depoimento-texto {
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+      .cliente-nome {
+        margin-top: 1rem;
+        font-size: 0.95rem;
+      }
+      .cliente-empresa {
+        font-size: 0.85rem;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+      }
+
+      .planos {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .plano-card {
+        padding: 1.2rem 1rem;
+        border-radius: 16px;
+      }
+      .plano-nome {
+        font-size: 1.1rem;
+        padding-bottom: 0.6rem;
+      }
+      .plano-preco {
+        font-size: 1.6rem;
+        margin: 0.8rem 0 0.2rem;
+      }
+      .plano-preco small {
+        font-size: 0.8rem;
+      }
+      .plano-desc {
+        font-size: 0.9rem;
+        margin: 0.8rem 0;
+      }
+      .btn-plano {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+        margin-top: 0.8rem;
+      }
+
+      .contato-wrapper {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        border-radius: 30px;
+      }
+      .form-contato {
+        width: 100%;
+      }
+      .info-contato {
+        width: 100%;
+        padding: 1.2rem;
+        border-radius: 20px;
+      }
+      .campo {
+        margin-bottom: 1.2rem;
+      }
+      .campo input,
+      .campo textarea {
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        border-radius: 50px;
+      }
+      .campo textarea {
+        border-radius: 25px;
+      }
+      .btn-form {
+        width: 100%;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+      }
+      .info-contato p {
+        margin: 1rem 0;
+        font-size: 0.95rem;
+      }
+      .redes-sociais a {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+      }
+
+      footer {
+        padding: 1.5rem 2% 1rem;
+      }
+      .footer-grid {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .footer-links {
+        width: 100%;
+        text-align: center;
+      }
+      .footer-links a {
+        display: inline-block;
+        margin-right: 0.8rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.85rem;
+      }
+      .copy {
+        font-size: 0.8rem;
+        margin-top: 1rem;
+      }
+    }
+
+    /* validação mensagem */
+    .erro-msg {
+      color: #c03b2b;
+      font-size: 0.8rem;
+      margin-top: 0.3rem;
+      padding-left: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Indelével <span>licitação</span></div>
+    <nav aria-label="Navegação principal">
+      <a href="#servicos">Serviços</a>
+      <a href="#clientes">Clientes</a>
+      <a href="#valores">Valores</a>
+      <a href="#contato">Contato</a>
+      <button class="btn-destaque" onclick="document.getElementById('contato').scrollIntoView()">Solicite uma Proposta</button>
+    </nav>
+  </header>
+
+  <main role="main">
+  <section class="hero" id="inicio">
+    <div class="hero-logo" aria-hidden="false">
+      <img src="assets/logo.png" alt="Logotipo Indelável Licitação" class="company-logo" loading="lazy">
+    </div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h1>Transforme desafios licitatórios em oportunidades de crescimento</h1>
+        <p>Consultoria especializada para empresas que desejam fornecer ao setor público</p>
+        <button class="btn-cta" onclick="document.getElementById('valores').scrollIntoView()">Quero participar de licitações</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre" aria-labelledby="sobre-title">
+    <h2 id="sobre-title" class="section-title">Quem somos</h2>
+    <div class="sobre-grid">
+      <div class="sobre-texto">
+        <p><strong>Indelével Licitação</strong> — ativa desde 2023 — nasceu para linkar fornecedores a órgãos públicos com <strong>ética, transparência e eficiência</strong>. Nossa equipe domina as normas, regulamentações e a dinâmica dos pregões, dispensas e cadastros. Mais que consultoria, oferecemos uma parceria estratégica para que sua empresa conquiste o mercado público com segurança e competitividade.</p>
+        <p style="margin-top:1rem">⭐ Possuímos profundo conhecimento das leis de licitações e compliance, atuando em todas as fases: da análise do edital ao recurso, do SICAF ao reequilíbrio econômico.</p>
+      </div>
+      <div class="sobre-highlight">
+        <i class="fas fa-file-signature"></i>
+        <h3>+10.000</h3>
+        <p>licitações diárias analisadas</p>
+        <i class="fas fa-trophy" style="margin-top:1.5rem;"></i>
+        <p style="margin-top:0.3rem;">expertise em todas as esferas</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos">
+    <h2 id="servicos-title" class="section-title">Serviços especializados</h2>
+    <div class="container-grid">
+      <div class="card-servico"><i class="fas fa-search"></i><h3>Análise de Editais</h3><p>Identificamos oportunidades sob medida e riscos ocultos.</p></div>
+      <div class="card-servico"><i class="fas fa-file-alt"></i><h3>Elaboração de Propostas</h3><p>Documentos técnicos e administrativos impecáveis.</p></div>
+      <div class="card-servico"><i class="fas fa-gavel"></i><h3>Pregões Eletrônicos / Presenciais</h3><p>Estratégia, lances e representação (quando necessário).</p></div>
+      <div class="card-servico"><i class="fas fa-scale-balanced"></i><h3>Recursos & Impugnações</h3><p>Defesa jurídica dos seus interesses.</p></div>
+      <div class="card-servico"><i class="fas fa-id-card"></i><h3>Cadastro SICAF</h3><p>Regularização completa e atualização.</p></div>
+    </div>
+  </section>
+
+  <section id="clientes" style="background:#f2f6fa;">
+    <h2 id="clientes-title" class="section-title">Clientes satisfeitos</h2>
+    <div class="slider-container">
+      <div class="depoimento-card active" id="depo1">
+        <div class="depoimento-texto">“A Indelével nos ajudou a vencer nosso primeiro pregão. Assessoria completa e transparente. Recomendo!”</div>
+        <div class="cliente-nome">Alessandro <span class="cliente-empresa">(AMC Extintores)</span></div>
+      </div>
+      <div class="depoimento-card" id="depo2">
+        <div class="depoimento-texto">“Equipe ágil, conhece todas as nuances do SICAF e recursos. Fechamos contrato de R$ 480 mil.”</div>
+        <div class="cliente-nome">Leandro <span class="cliente-empresa">(FG Construção)</span></div>
+      </div>
+      <div class="depoimento-card" id="depo3">
+        <div class="depoimento-texto">“Atendimento humanizado e honesto. Já estamos com cadastro ativo e participando de dispensas.”</div>
+        <div class="cliente-nome">Henry <span class="cliente-empresa">(Ponto Norte)</span></div>
+      </div>
+      <div class="slider-dots">
+        <span class="dot active-dot" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="valores">
+    <h2 id="valores-title" class="section-title">Valores e planos</h2>
+    <div class="planos">
+      <div class="plano-card">
+        <div class="plano-nome">Fixo sem comissão</div>
+        <div class="plano-preco">R$ 2.640<small>/mês</small></div>
+        <div class="plano-desc">Contrato 3 meses. Tudo incluso: análise, propostas, recursos, SICAF. Sem comissão sobre vitórias.</div>
+        <button class="btn-plano" data-plano="Fixo sem comissão - R$ 2.640/mês">Contratar agora</button>
+      </div>
+      <div class="plano-card">
+        <div class="plano-nome">Fixo + comissão</div>
+        <div class="plano-preco">R$ 1.640<small>/mês</small></div>
+        <div class="plano-desc">3 meses de contrato. Comissão de 2% sobre o valor bruto empenhado. Ideal para quem começa.</div>
+        <button class="btn-plano" data-plano="Fixo + comissão - R$ 1.640/mês">Contratar agora</button>
+      </div>
+      <div class="plano-card">
+        <div class="plano-nome">Por pregão</div>
+        <div class="plano-preco">R$ 660</div>
+        <div class="plano-desc">Pregões até R$ 100 mil. Consultar valores acima disso. Inclui toda assessoria no certame.</div>
+        <button class="btn-plano" data-plano="Por pregão - R$ 660">Contratar agora</button>
+      </div>
+      <div class="plano-card">
+        <div class="plano-nome">Cadastro SICAF</div>
+        <div class="plano-preco">R$ 350</div>
+        <div class="plano-desc">Cadastro único ou renovação. Regularize sua empresa para compras governamentais.</div>
+        <button class="btn-plano" data-plano="Cadastro SICAF - R$ 350">Contratar agora</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <h2 id="contato-title" class="section-title">Fale com a gente</h2>
+    <div class="contato-wrapper">
+      <div class="form-contato">
+        <form id="formContato">
+          <div class="campo">
+            <label class="sr-only" for="nome">Seu nome completo</label>
+            <input type="text" id="nome" placeholder="Seu nome completo" required>
+          </div>
+          <div class="campo">
+            <label class="sr-only" for="email">E-mail corporativo</label>
+            <input type="email" id="email" placeholder="E-mail corporativo" required>
+          </div>
+          <div class="campo">
+            <label class="sr-only" for="telefone">Telefone ou WhatsApp</label>
+            <input type="tel" id="telefone" placeholder="Telefone / WhatsApp" required>
+          </div>
+          <div class="campo">
+            <label class="sr-only" for="mensagem">Mensagem</label>
+            <textarea id="mensagem" rows="4" placeholder="Como podemos ajudar?" required></textarea>
+          </div>
+          <button type="submit" class="btn-form">Enviar mensagem</button>
+          <div id="form-feedback" style="margin-top:1rem;"></div>
+        </form>
+      </div>
+      <div class="info-contato">
+        <p><i class="fas fa-phone-alt"></i> (21) 98579-6670 / (21) 98222-4903</p>
+        <p><i class="fas fa-envelope"></i> indelevelicitacao@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Rua Francisco Mendes, 46 – Deodoro, RJ</p>
+        <div class="redes-sociais">
+          <a href="#" id="instagram-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" id="linkedin-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" id="whatsapp-link"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-links">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+        <a href="#contato">Contato</a>
+      </div>
+      <div>
+        <i class="fas fa-crown" style="color: var(--dourado);"></i>
+      </div>
+    </div>
+    <div class="copy">© 2026 Indelével Licitação · consultoria em licitações. Todos os direitos reservados.</div>
+  </footer>
+
+  <script>
+    (function() {
+      // ---------- SLIDER AUTOMÁTICO ----------
+      const depoimentos = document.querySelectorAll('.depoimento-card');
+      const dots = document.querySelectorAll('.dot');
+      let currentIndex = 0;
+      let slideInterval;
+
+      function showDepoimento(index) {
+        depoimentos.forEach(d => d.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active-dot'));
+        depoimentos[index].classList.add('active');
+        dots[index].classList.add('active-dot');
+        currentIndex = index;
+      }
+
+      function nextSlide() {
+        let next = (currentIndex + 1) % depoimentos.length;
+        showDepoimento(next);
+      }
+
+      // iniciar slider automático
+      slideInterval = setInterval(nextSlide, 5000);
+
+      // dots manuais
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+          clearInterval(slideInterval);
+          showDepoimento(idx);
+          slideInterval = setInterval(nextSlide, 5000);
+        });
+      });
+
+      // ---------- WHATSAPP CONFIG ----------
+      const telefone = '5521985796670'; // (21) 98579-6670 formatado para WhatsApp
+      
+      function abrirWhatsApp(mensagem) {
+        const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+          window.open(url, '_blank', 'noopener,noreferrer');
+      }
+
+      // Botões dos planos
+      document.querySelectorAll('.btn-plano').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const plano = btn.getAttribute('data-plano');
+          const mensagem = `Olá! Tenho interesse no plano: ${plano}. Podemos conversar?`;
+          abrirWhatsApp(mensagem);
+        });
+      });
+
+      // WhatsApp do rodapé/contato
+      document.getElementById('whatsapp-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        const mensagem = 'Olá! Gostaria de saber mais sobre a consultoria em licitações.';
+        abrirWhatsApp(mensagem);
+      });
+
+      // Instagram e LinkedIn
+      document.getElementById('instagram-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.open('https://instagram.com/indelevelicitacao', '_blank', 'noopener,noreferrer');
+      });
+
+      document.getElementById('linkedin-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.open('https://linkedin.com/company/indelevel-licitacao', '_blank', 'noopener,noreferrer');
+      });
+
+      // ---------- VALIDAÇÃO DE FORMULÁRIO ----------
+      const form = document.getElementById('formContato');
+      const feedback = document.getElementById('form-feedback');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const tel = document.getElementById('telefone').value.trim();
+        const msg = document.getElementById('mensagem').value.trim();
+
+        feedback.innerHTML = '';
+
+        if (!nome || !email || !tel || !msg) {
+          feedback.innerHTML = '<span style="color:#b34a3a;">⚠️ Todos os campos são obrigatórios.</span>';
+          return;
+        }
+        if (!email.includes('@') || !email.includes('.')) {
+          feedback.innerHTML = '<span style="color:#b34a3a;">📧 E-mail inválido.</span>';
+          return;
+        }
+        
+        const digits = tel.replace(/\D/g, '');
+        if (digits.length < 10) {
+          feedback.innerHTML = '<span style="color:#b34a3a;">📞 Telefone deve ter pelo menos 10 dígitos.</span>';
+          return;
+        }
+
+        feedback.innerHTML = '<span style="color:#2e7d5e;">✅ Mensagem enviada com sucesso! Em breve retornaremos.</span>';
+        form.reset();
+      });
+
+      // Scroll suave
+      document.querySelectorAll('nav a, .btn-destaque, .btn-cta').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const href = this.getAttribute('href') || '#contato';
+          if (href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if(target) target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const id = this.getAttribute('href');
+          const section = document.querySelector(id);
+          if(section) section.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>
